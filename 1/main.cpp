@@ -75,12 +75,12 @@ short **CreateArray(ifstream &inputFile, SizeOfMap & sizeOfMap) {
 
     array = new short *[sizeOfMap.size.first];
     for (int i = 0; i < sizeOfMap.size.first; ++i) {
-        array[i] = new short[sizeOfMap.size.first];
+        array[i] = new short[sizeOfMap.size.second];
     }
 
     for (int linesCounter = 0; (getline(inputFile, str) && linesCounter < sizeOfMap.size.first); ++linesCounter) {
         const char *ch = str.c_str();
-        for (size_t columnCounter = 0; columnCounter < sizeOfMap.size.first; ++columnCounter) {
+        for (size_t columnCounter = 0; columnCounter < sizeOfMap.size.second; ++columnCounter) {
             array[linesCounter][columnCounter] = short(ch[columnCounter] - '0');
         }
     }
@@ -151,7 +151,7 @@ bool AreAnyOfNeighborsATree(const int &i, const int &j, const int &positionCount
 
 void PrintResult(short **array, const size_t &solution, SizeOfMap & sizeOfMap) {
     for (int i = 0; i < sizeOfMap.size.first; ++i) {
-        for (int j = 0; j < sizeOfMap.size.first; ++j) {
+        for (int j = 0; j < sizeOfMap.size.second; ++j) {
             cout << array[i][j] << " ";
         }
         cout << endl;
