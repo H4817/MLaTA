@@ -256,8 +256,3 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-//TODO 1)
-//TODO 2) Деполякизация
-//TODO 3)
-//TODO 4)
-//TODO 5)
