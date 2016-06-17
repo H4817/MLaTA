@@ -1,5 +1,6 @@
 #include <sstream>
 #include "Multiplication.h"
+#include <algorithm>
 
 size_t CMultiplication::GetInputNumber() const
 {
@@ -28,42 +29,65 @@ void CMultiplication::ReadFromFile(const std::string &nameOfFile)
     }
 }
 
+size_t CMultiplication::GetDifference()
+{
+    size_t sum = 0;
+    for (auto const &it : m_result)
+    {
+        sum += it;
+    }
+    return m_inputNumber - sum;
+}
+
 void CMultiplication::CalculateMaxMultiplicationSequence()
 {
     if (m_inputNumber >= 1 && m_inputNumber <= 10000)
     {
-        if (m_inputNumber == 1 || m_inputNumber == 2 || m_inputNumber == 3 || m_inputNumber == 4)
+        if (m_inputNumber == 1 || m_inputNumber == 2 || m_inputNumber == 3 || m_inputNumber == 4) //fix it
         {
             m_result.push_back(m_inputNumber);
         }
-        else
+        else //and it
         {
-            auto tmp = m_inputNumber;
-            while (tmp % 3 != 0)
+            size_t counter = 0;
+            counter = 2;
+            while ( GetDifference() != 0 || m_result.size() == 0)
             {
-                --tmp;
-            }
-            auto amountOfTreys = tmp / 3;
-            size_t amountOfDeuces = 0;
-            if ((m_inputNumber - tmp) % 2 == 0)
-            {
-                amountOfDeuces = (m_inputNumber - tmp) / 2;
-            }
-
-            for (int i = 0; i < amountOfTreys; ++i)
-            {
-                m_result.push_back(3);
-            }
-            if (amountOfDeuces == 1)
-            {
-                m_result.push_back(2);
-            }
-            else
-            {
-                for (int i = 0; i < amountOfDeuces; ++i)
+                auto diff = GetDifference();
+                if (diff > 0)
                 {
-                    m_result.push_back(2);
+                    m_result.push_back(counter);
                 }
+                else
+                {
+                    diff *= -1;
+                    if (std::find(m_result.begin(), m_result.end(), diff) != m_result.end())
+                    {
+                        for (size_t i = 0; i < m_result.size(); ++i)
+                        {
+                            if (m_result[i] == diff)
+                            {
+                                m_result.erase(m_result.begin() + i);
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        for (size_t i = 0; i < m_result.size(); ++i)
+                        {
+                            auto number = m_result[i] - diff;
+                            if (std::find(m_result.begin(), m_result.end(), number) == m_result.end())
+                            {
+                                if (number != 1)
+                                    m_result[i] = number;
+                                else
+                                    m_result.erase(m_result.begin() + i);
+                            }
+                        }
+                    }
+                }
+                ++counter;
             }
         }
     }
@@ -80,7 +104,7 @@ void CMultiplication::WriteToFile(const std::string &nameOfFile)
     output.open(nameOfFile);
     if (output.is_open())
     {
-        for (auto const & it : m_result)
+        for (auto const &it : m_result)
         {
             output << it << " ";
         }

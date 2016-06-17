@@ -13,6 +13,8 @@ public:
 
     size_t GetInputNumber() const;
 
+    size_t GetDifference();
+
     void CalculateMaxMultiplicationSequence();
 
     const std::vector<size_t> &GetResult() const;
