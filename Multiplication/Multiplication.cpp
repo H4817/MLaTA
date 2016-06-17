@@ -43,17 +43,15 @@ void CMultiplication::CalculateMaxMultiplicationSequence()
 {
     if (m_inputNumber >= 1 && m_inputNumber <= 10000)
     {
-        if (m_inputNumber == 1 || m_inputNumber == 2 || m_inputNumber == 3 || m_inputNumber == 4) //fix it
+        if (m_inputNumber == 1 || m_inputNumber == 2 || m_inputNumber == 3 || m_inputNumber == 4) 
         {
             m_result.push_back(m_inputNumber);
         }
-        else //and it
+        else
         {
-            size_t counter = 0;
-            counter = 2;
-            while ( GetDifference() != 0 || m_result.size() == 0)
+            size_t counter = 2;
+            while (auto diff = GetDifference() != 0 || m_result.size() == 0)
             {
-                auto diff = GetDifference();
                 if (diff > 0)
                 {
                     m_result.push_back(counter);
