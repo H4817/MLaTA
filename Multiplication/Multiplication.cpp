@@ -2,12 +2,12 @@
 #include "Multiplication.h"
 #include <algorithm>
 
-size_t CMultiplication::GetInputNumber() const
+int CMultiplication::GetInputNumber() const
 {
     return m_inputNumber;
 }
 
-const std::vector<size_t> &CMultiplication::GetResult() const
+const std::vector<int> &CMultiplication::GetResult() const
 {
     return m_result;
 }
@@ -29,41 +29,43 @@ void CMultiplication::ReadFromFile(const std::string &nameOfFile)
     }
 }
 
-size_t CMultiplication::GetDifference()
+int CMultiplication::GetDifference()
 {
-    size_t sum = 0;
-    for (auto const &it : m_result)
-    {
-        sum += it;
-    }
-    return m_inputNumber - sum;
+    int sumOfElements = 0;
+    for (auto const & n : m_result)
+        sumOfElements += n;
+    return m_inputNumber - sumOfElements;
 }
 
 void CMultiplication::CalculateMaxMultiplicationSequence()
 {
     if (m_inputNumber >= 1 && m_inputNumber <= 10000)
     {
-        if (m_inputNumber == 1 || m_inputNumber == 2 || m_inputNumber == 3 || m_inputNumber == 4) 
+        if (m_inputNumber == 1 || m_inputNumber == 2 || m_inputNumber == 3 || m_inputNumber == 4)
         {
             m_result.push_back(m_inputNumber);
         }
         else
         {
-            size_t counter = 2;
-            while (auto diff = GetDifference() != 0 || m_result.size() == 0)
+            int counter = 2;
+            for (; ;)
             {
-                if (diff > 0)
+                auto difference = GetDifference();
+                if (difference == 0)
+                    break;
+                else if (difference > 0)
                 {
                     m_result.push_back(counter);
+                    ++counter;
                 }
                 else
                 {
-                    diff *= -1;
-                    if (std::find(m_result.begin(), m_result.end(), diff) != m_result.end())
+                    difference *= -1;
+                    if (std::find(m_result.begin(), m_result.end(), difference) != m_result.end())
                     {
                         for (size_t i = 0; i < m_result.size(); ++i)
                         {
-                            if (m_result[i] == diff)
+                            if (m_result[i] == difference)
                             {
                                 m_result.erase(m_result.begin() + i);
                                 break;
@@ -74,7 +76,7 @@ void CMultiplication::CalculateMaxMultiplicationSequence()
                     {
                         for (size_t i = 0; i < m_result.size(); ++i)
                         {
-                            auto number = m_result[i] - diff;
+                            auto number = m_result[i] - difference;
                             if (std::find(m_result.begin(), m_result.end(), number) == m_result.end())
                             {
                                 if (number != 1)
@@ -85,7 +87,6 @@ void CMultiplication::CalculateMaxMultiplicationSequence()
                         }
                     }
                 }
-                ++counter;
             }
         }
     }

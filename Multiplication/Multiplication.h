@@ -11,16 +11,16 @@ public:
 
     void WriteToFile(const std::string &nameOfFile = "output.txt");
 
-    size_t GetInputNumber() const;
+    int GetInputNumber() const;
 
-    size_t GetDifference();
+    int GetDifference();
 
     void CalculateMaxMultiplicationSequence();
 
-    const std::vector<size_t> &GetResult() const;
+    const std::vector<int> &GetResult() const;
 
 private:
-    size_t m_inputNumber;
-    std::vector<size_t> m_result;
+    int m_inputNumber;
+    std::vector<int> m_result;
 };
 
