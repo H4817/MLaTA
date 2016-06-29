@@ -23,7 +23,7 @@ include_directories("${PROJECT_BINARY_DIR}")
 
 # Define sources and executable
 set(EXECUTABLE_NAME "myproject")
-add_executable(${EXECUTABLE_NAME} main.cpp AbstractBox.cpp AbstractBox.h CheckBox.cpp CheckBox.h Button.cpp Button.h Field.cpp Field.h)
+add_executable(${EXECUTABLE_NAME} main.cpp AbstractBox.h CheckBox.cpp CheckBox.h Button.cpp Button.h Field.cpp Field.h FileManager.cpp FileManager.h)
 
 
 # Detect and add SFML

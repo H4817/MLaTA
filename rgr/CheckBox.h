@@ -1,5 +1,8 @@
+#pragma once
+
 #include "AbstractBox.h"
 
-class CCheckBox : public CAbstractBox {
+class CCheckBox : public IAbstractBox
+{
 
 };

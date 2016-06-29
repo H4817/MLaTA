@@ -1,16 +1,34 @@
+#pragma once
+
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-class CAbstractBox {
+enum State
+{
+    OWN_MENU,
+    OPEN_FILE_FOR_INPUT,
+    OPEN_FILE_FOR_OUTPUT,
+    GET_HELP
+};
+
+struct Parameters
+{
+    std::pair<int, int> upLeftCoordinates;
+    std::pair<int, int> widthAndHeight;
+};
+
+class IAbstractBox
+{
 public:
-    virtual ~CAbstractBox() = default;
+    virtual ~IAbstractBox() = default;
 
-    bool IsCollide();
+    virtual void CreateBox() const = 0;
 
-    bool IsSelected();
+    virtual bool IsMouseOnBox() const = 0;
+
+    virtual bool IsSelected() const = 0;
 
 protected:
-    bool m_isSelected;
-
+    Parameters m_parameters;
 };
 

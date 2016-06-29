@@ -1,7 +1,7 @@
 
 #include "AbstractBox.h"
 
-class CButton : public CAbstractBox {
+class CButton : public IAbstractBox {
 
 };
 
