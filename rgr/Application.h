@@ -1,10 +1,12 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-using namespace std;
-using namespace sf;
+class CApplication
+{
+public:
+    void RunTheProgram();
 
-class CApplication {
+    void Render();
 
 };
 

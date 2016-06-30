@@ -3,5 +3,9 @@
 
 int main()
 {
+    CreateCheckBox("OpenInputFile");
+    CreateCheckBox("OpenOutputFile");
+    CreateCheckBox("SaveTheFile");
+    CreateCheckBox("Help");
     return 0;
 }

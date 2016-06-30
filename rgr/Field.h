@@ -9,8 +9,12 @@ public:
 
     void WriteOnField();
 
+    const std::string &GetLocalMessage() const;
+
+    void SetLocalMessage(const std::string &localMessage);
+
 private:
-    std::string m_str;
+    std::string localMessage;
 };
 
 

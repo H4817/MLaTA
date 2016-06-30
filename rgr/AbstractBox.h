@@ -3,6 +3,24 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
+struct Color
+{
+    Color() = default;
+
+    Color(int r, int g, int b)
+            : r(r), g(g), b(b)
+    { };
+
+    int r = 0;
+    int g = 0;
+    int b = 0;
+
+    bool operator==(const Color &color)
+    {
+        return this->r == color.r && this->g == color.g && this->b == color.b;
+    }
+};
+
 enum State
 {
     OWN_MENU,
@@ -29,6 +47,11 @@ public:
     virtual bool IsSelected() const = 0;
 
 protected:
+    std::string m_string;
     Parameters m_parameters;
+    Color m_backgroundColor;
+    Color m_lineColor;
+    sf::RectangleShape m_rectangle;
+
 };
 
